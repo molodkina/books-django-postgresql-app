@@ -1,77 +1,56 @@
-# from django.http import HttpResponse, HttpResponseRedirect
-# from django.shortcuts import render, get_object_or_404
-# from django.views.decorators.csrf import csrf_exempt
-# from django.db.models import Avg, Count
-# from django.urls import reverse
-# from django.utils import timezone
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
+from rest_framework.viewsets import ViewSet, ModelViewSet
+from url_filter.integrations.drf import DjangoFilterBackend
+from django_filters import rest_framework as filters
 
-# from molodkina_books.models import Book, Book_Author, Author
+from molodkina_books.models import Book, Author, Country
+from molodkina_books.serializers import BookSerializer, AuthorSerializer, CountrySerializer
 
-# # Create your views here.
+def hello(request):
+    return HttpResponse('<h1> Exophonic Writers</h1>')
 
-# def index(request):
-#     print('Request for index page received')
+class AuthorViewSet(ViewSet):
+    serializer_class = AuthorSerializer
 
-#     restaurants = Restaurant.objects.annotate(avg_rating=Avg('review__rating')).annotate(review_count=Count('review'))
-#     return render(request, 'restaurant_review/index.html', {'restaurants': restaurants })
+    def list(self, request):
+        queryset = Author.objects.filter()
+        serializer = AuthorSerializer(queryset, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
+    def retrieve(self, request, pk=None):
+        queryset = Author.objects.filter()
+        author = get_object_or_404(queryset, pk=pk)
+        serializer = AuthorSerializer(author)
+        return JsonResponse(serializer.data, safe=False)
 
-# def details(request, id):
-#     print('Request for restaurant details page received')
+class BookViewSet(ViewSet):
+    serializer_class = BookSerializer
 
-#     restaurant = get_object_or_404(Restaurant, pk=id)
+    def list(self, request, author_pk=None):
+        queryset = Book.objects.filter(Author_id=author_pk)
+        serializer = BookSerializer(queryset, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
+    def retrieve(self, request, pk=None, author_pk=None):
+        queryset = Book.objects.filter(pk=pk, Author_id=author_pk)
+        book = get_object_or_404(queryset, pk=pk)
+        serializer = BookSerializer(book)
+        return JsonResponse(serializer.data, safe=False)
 
-#     return render(request, 'restaurant_review/details.html', {'restaurant': restaurant})
+class CountryViewSet(ViewSet):
+    serializer_class = CountrySerializer
 
-
-
-# def create_restaurant(request):
-#     print('Request for add restaurant page received')
-
-#     return render(request, 'restaurant_review/create_restaurant.html')
-
-
-# @csrf_exempt
-# def add_restaurant(request):
-#     try:
-#         name = request.POST['restaurant_name']
-#         street_address = request.POST['street_address']
-#         description = request.POST['description']
-#     except (KeyError):
-#         # Redisplay the question voting form.
-#         return render(request, 'restaurant_review/add_restaurant.html', {
-#             'error_message': "You must include a restaurant name, address, and description",
-#         })
-#     else:
-#         restaurant = Restaurant()
-#         restaurant.name = name
-#         restaurant.street_address = street_address
-#         restaurant.description = description
-#         Restaurant.save(restaurant)
-                
-#         return HttpResponseRedirect(reverse('details', args=(restaurant.id,)))
-
-
-# @csrf_exempt
-# def add_review(request, id):
-#     restaurant = get_object_or_404(Restaurant, pk=id)
-#     try:
-#         user_name = request.POST['user_name']
-#         rating = request.POST['rating']
-#         review_text = request.POST['review_text']
-#     except (KeyError):
-#         #Redisplay the question voting form.
-#         return render(request, 'restaurant_review/add_review.html', {
-#             'error_message': "Error adding review",
-#         })
-#     else:
-#         review = Review()
-#         review.restaurant = restaurant
-#         review.review_date = timezone.now()
-#         review.user_name = user_name
-#         review.rating = rating
-#         review.review_text = review_text
-#         Review.save(review)
-                
-#     return HttpResponseRedirect(reverse('details', args=(id,)))        
+    def list(self, request, author_pk=None):
+        queryset = Country.objects.filter(author=author_pk)
+        serializer = CountrySerializer(queryset, many=True)
+        return JsonResponse(serializer.data, safe=False)
+ 
+class BookFilterViewSet(ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['Language', 'YearOfPublication']
