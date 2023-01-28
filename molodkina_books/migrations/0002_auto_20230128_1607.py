@@ -167,12 +167,12 @@ def insert_data(apps, schema_editor):
     Book(Title = 'The Kite Runner',
     Language = 'English',
     YearOfPublication = 2003,
-    Author = kundera).save()
+    Author = hosseini).save()
 
     Book(Title = 'A Thousand Splendid Suns',
     Language = 'English',
     YearOfPublication = 2007,
-    Author = kundera).save()
+    Author = hosseini).save()
 
     
 class Migration(migrations.Migration):
