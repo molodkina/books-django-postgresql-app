@@ -5,14 +5,14 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from rest_framework.viewsets import ViewSet, ModelViewSet
 from url_filter.integrations.drf import DjangoFilterBackend
-from django_filters import rest_framework as filters
+from django_filters import rest_framework as filters, FilterSet
 from rest_framework import generics
 
-from molodkina_books.models import Book, Author, Country
-from molodkina_books.serializers import BookSerializer, AuthorSerializer, CountrySerializer
+from molodkina_books.models import Book, Author, Residence
+from molodkina_books.serializers import BookSerializer, AuthorSerializer, ResidenceSerializer
 
 def hello(request):
-    return HttpResponse('<h1> Exophonic Writers</h1>')
+    return HttpResponse('<h1> Exophonic Writers and Their Books</h1>')
 
 class AuthorViewSet(ViewSet):
     serializer_class = AuthorSerializer
@@ -42,18 +42,21 @@ class BookViewSet(ViewSet):
         serializer = BookSerializer(book)
         return JsonResponse(serializer.data, safe=False)
 
-class CountryViewSet(ViewSet):
+class ResidenceViewSet(ViewSet):
 
     def list(self, request, author_pk=None):
-        queryset = Country.objects.filter(author=author_pk)
-        serializer_class = CountrySerializer(queryset, many=True)
+        queryset = Residence.objects.filter(author=author_pk)
+        serializer_class = ResidenceSerializer(queryset, many=True)
         return JsonResponse(serializer_class.data, safe=False)
  
 class BookFilterViewSet(generics.GenericAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer(queryset, many = True)
     filter_backends = [DjangoFilterBackend]
-    filter_fields = ['Language', 'YearOfPublication']
+    filter_fields = {
+        'Language': ['icontains'],
+        'YearOfPublication': ['gt', 'lt']
+    }
 
     def get(self, request):
         filtered_queryset = self.filter_queryset(self.get_queryset())

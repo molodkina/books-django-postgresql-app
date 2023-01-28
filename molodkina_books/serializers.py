@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from molodkina_books.models import Book, Author, Country
+from molodkina_books.models import Book, Author, Residence
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,7 +11,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         model = Author
         fields=('id', 'Name', 'YearOfBirth', 'YearOfDeath', 'PlaceOfBirth', 'PlaceOfDeath')
 
-class CountrySerializer(serializers.ModelSerializer):
+class ResidenceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Country
+        model = Residence
         fields=('id', 'Name')

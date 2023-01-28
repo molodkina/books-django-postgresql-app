@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Country(models.Model):
+class Residence(models.Model):
     Name = models.CharField(max_length=250)
     def __str__(self):
         return self.Name
@@ -12,7 +12,7 @@ class Author(models.Model):
     YearOfDeath = models.IntegerField(blank=True, null=True)
     PlaceOfBirth = models.CharField(max_length=250)
     PlaceOfDeath = models.CharField(max_length=250, blank=True, null=True)
-    Nationalities = models.ManyToManyField(Country)
+    Residence = models.ManyToManyField(Residence)
     def __str__(self):
         return self.Name
 

@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework_nested import routers
 from molodkina_books import views
-from molodkina_books.views import BookViewSet, CountryViewSet, BookFilterViewSet, AuthorViewSet
+from molodkina_books.views import BookViewSet, ResidenceViewSet, BookFilterViewSet, AuthorViewSet
 
 default_router = routers.DefaultRouter()
 default_router.register(r'authors', AuthorViewSet, basename='authors')
@@ -12,7 +12,7 @@ book_router = routers.NestedSimpleRouter(default_router, r'authors', lookup='aut
 book_router.register(r'books', BookViewSet, basename='books')
 
 country_router = routers.NestedSimpleRouter(default_router, r'authors', lookup='author')
-country_router.register(r'countries', CountryViewSet, basename='countries')
+country_router.register(r'countries', ResidenceViewSet, basename='countries')
 
 
 urlpatterns = [
