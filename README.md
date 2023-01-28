@@ -66,9 +66,10 @@ This is a Python web app using the Django framework and the Azure Database for P
 
 **Example request:** https://molodkina-books-api.azurewebsites.net/authors/2/books/5<br>
 
-### GET /authors/countries
-**Request URL:** https://molodkina-books-api.azurewebsites.net/authors/countries<br>
+### GET /authors/{author_id}/countries
 **Description:** Returns an array of all countries a selected author resided in over the course of his life.<br>
 **Returns Values:**
 * Country_id
-* Name
+* Name<br>
+
+**Example request:* https://molodkina-books-api.azurewebsites.net/authors/2/countries<br>
