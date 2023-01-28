@@ -72,4 +72,4 @@ This is a Python web app using the Django framework and the Azure Database for P
 * Country_id
 * Name<br>
 
-**Example request:* https://molodkina-books-api.azurewebsites.net/authors/2/countries<br>
+**Example request:** https://molodkina-books-api.azurewebsites.net/authors/2/countries<br>
