@@ -6,7 +6,7 @@ This is a Python web app using the Django framework and the Azure Database for P
 ## Available endpoints
 
 ### GET /authors
-**Request URL:** https://molodkina-books-api.azurewebsites.net/authors/<br>
+**Request URL:** https://molodkina-books.azurewebsites.net/authors/<br>
 **Description:** Returns an array of all writers available in the database.<br>
 **Returns Values:**
 * Author_id
@@ -17,7 +17,7 @@ This is a Python web app using the Django framework and the Azure Database for P
 * PlaceOfDeath
 
 ### GET /books
-**Request URL:** https://molodkina-books-api.azurewebsites.net/books<br>
+**Request URL:** https://molodkina-books.azurewebsites.net/books<br>
 **Description:** Returns an array of all books available in the database.<br>
 **Returns Values:**
 * Book_id
@@ -30,7 +30,7 @@ This is a Python web app using the Django framework and the Azure Database for P
 * YearOfPublication (exact, greater than, less than)
 * Language (exact, icontains)<br>
 
-**Example request**:<br> https://molodkina-books-api.azurewebsites.net/books/?Language__icontains=en&YearOfPublication__gt=1991
+**Example request**:<br> https://molodkina-books.azurewebsites.net/books/?Language__icontains=en&YearOfPublication__gt=1991
 
 ### GET /authors/{author_id}
 **Description:** Returns a specific author based on Author ID.<br>
@@ -42,7 +42,7 @@ This is a Python web app using the Django framework and the Azure Database for P
 * PlaceOfBirth
 * PlaceOfDeath<br>
 
-**Example request:** https://molodkina-books-api.azurewebsites.net/authors/2<br>
+**Example request:** https://molodkina-books.azurewebsites.net/authors/2<br>
 
 ### GET /authors/{author_id}/books
 **Description:** Returns an array of all books for a specific author.<br>
@@ -53,7 +53,7 @@ This is a Python web app using the Django framework and the Azure Database for P
 * Language
 * Author_id<br>
 
-**Example request:** https://molodkina-books-api.azurewebsites.net/authors/2/books<br>
+**Example request:** https://molodkina-books.azurewebsites.net/authors/2/books<br>
 
 ### GET /authors/{author_id}/books/{book_id}
 **Description:** Returns a specific book written by a selected author based on Book ID.<br>
@@ -64,7 +64,7 @@ This is a Python web app using the Django framework and the Azure Database for P
 * Language
 * Author_id<br>
 
-**Example request:** https://molodkina-books-api.azurewebsites.net/authors/2/books/5<br>
+**Example request:** https://molodkina-books.azurewebsites.net/authors/2/books/5<br>
 
 ### GET /authors/{author_id}/countries
 **Description:** Returns an array of all countries a selected author resided in over the course of his life.<br>
@@ -72,4 +72,4 @@ This is a Python web app using the Django framework and the Azure Database for P
 * Country_id
 * Name<br>
 
-**Example request:** https://molodkina-books-api.azurewebsites.net/authors/2/countries<br>
+**Example request:** https://molodkina-books.azurewebsites.net/authors/2/countries<br>
