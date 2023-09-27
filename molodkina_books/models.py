@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# Create your models here...
 class Residence(models.Model):
     Name = models.CharField(max_length=250)
     def __str__(self):
