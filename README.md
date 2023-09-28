@@ -69,6 +69,7 @@ This is a Python web app using the Django framework and the Azure Database for P
 ### GET /authors/{author_id}/countries
 **Description:** Returns an array of all countries a selected author resided in over the course of his life.<br>
 **Returns Values:**
+
 * Country_id
 * Name<br>
 
