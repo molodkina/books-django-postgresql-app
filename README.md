@@ -1,7 +1,7 @@
 #  Exophonic Writers and Their Books
 ## About the App Service and API
 
-This is a Python web app using the Django framework and the Azure Database for PostgreSQL relational database service. It provides access to my favourite [exophonic](https://en.wiktionary.org/wiki/exophonic) writers and some of the books they've written in their native or second language.
+This is a Python web app using the Django framework and the Azure Database for PostgreSQL relational database service. It provides access to my favourite [exophonic](https://en.wiktionary.org/wiki/exophonic) writers and the books they've written in their native or second language.
 
 ## Available endpoints
 
