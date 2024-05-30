@@ -1,3 +1,4 @@
+THIS APP IS NOW OFFLINE. THIS IS AN ARCHIVE.
 #  Exophonic Writers and Their Books
 ## About the App Service and API
 
